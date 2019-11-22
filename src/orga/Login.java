@@ -5,12 +5,18 @@
  */
 package orga;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author IKAROS
  */
 public class Login extends javax.swing.JFrame {
-
+    public static ArrayList<Usuario> lista = new ArrayList<Usuario>();
+    String admin = "Admin_orga";
+    String password= "123";
+    public static String name = " ";
     /**
      * Creates new form Interfaz
      */
@@ -44,6 +50,11 @@ public class Login extends javax.swing.JFrame {
         btn_ingreso.setBackground(new java.awt.Color(0, 102, 255));
         btn_ingreso.setFont(new java.awt.Font("Serif", 1, 12)); // NOI18N
         btn_ingreso.setText("Ingresar");
+        btn_ingreso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ingresoActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Serif", 1, 12)); // NOI18N
         jLabel1.setText("Usuario:");
@@ -53,6 +64,11 @@ public class Login extends javax.swing.JFrame {
 
         jLabel3.setForeground(new java.awt.Color(102, 255, 102));
         jLabel3.setText("No tienes una cuenta ingresa aqui");
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -109,6 +125,47 @@ public class Login extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_ingresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ingresoActionPerformed
+        //String nombre = txt_usua.getText();
+        boolean des = false;
+        String pass = new String(txt_pass.getPassword());
+        if(txt_usua.getText().equals("Admin_orga")&&pass.equals("123")){
+            Administrador ad = new Administrador();
+            ad.setVisible(true);
+            setVisible(false);
+        }else{
+            for(int i=0;i<lista.size();i++){
+                System.out.println(lista.get(i).nombre);
+                if(lista.get(i)!=null){
+                    if(txt_usua.getText().replace(" ", "").equals(lista.get(i).nombre)&&pass.replace(" ", "").equals(lista.get(i).password)){
+                        des = true;
+                        break;
+                    }else{
+                        
+                        des = false;
+                    }
+                }else{
+                   // break;
+                }
+                
+            }
+            if(des==true){
+                name = txt_usua.getText();
+                Menu men = new Menu();
+                men.setVisible(true);
+                setVisible(false);
+            }else{
+                JOptionPane.showMessageDialog(null, "usuario o contraseña incorrecta intente nuevamente: ");
+             }
+        }
+    }//GEN-LAST:event_btn_ingresoActionPerformed
+
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        Registro re = new Registro();
+        re.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_jLabel3MouseClicked
 
     /**
      * @param args the command line arguments
