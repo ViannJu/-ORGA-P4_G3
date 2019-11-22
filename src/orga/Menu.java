@@ -4,7 +4,10 @@
  * and open the template in the editor.
  */
 package orga;
-
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
+import static orga.Login.name;
 /**
  *
  * @author IKAROS
@@ -16,6 +19,20 @@ public class Menu extends javax.swing.JFrame {
      */
     public Menu() {
         initComponents();
+        txt_usuario.setText(name);
+    }
+    
+    public void abrirarchivo(String archivo){
+
+     try {
+
+            File objetofile = new File (archivo);
+            Desktop.getDesktop().open(objetofile);
+
+     }catch (IOException ex) {
+
+            System.out.println(ex);
+     }
     }
 
     /**
@@ -34,12 +51,13 @@ public class Menu extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        btn_docu = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        txt_usuario = new javax.swing.JTextField();
+        btn_back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,13 +83,27 @@ public class Menu extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Sitka Text", 1, 12)); // NOI18N
         jLabel4.setText("USUARIO:");
 
-        jButton3.setBackground(new java.awt.Color(102, 102, 255));
-        jButton3.setFont(new java.awt.Font("Sitka Text", 1, 12)); // NOI18N
-        jButton3.setText("Ver Documentacion");
+        btn_docu.setBackground(new java.awt.Color(102, 102, 255));
+        btn_docu.setFont(new java.awt.Font("Sitka Text", 1, 12)); // NOI18N
+        btn_docu.setText("Ver Documentacion");
+        btn_docu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_docuActionPerformed(evt);
+            }
+        });
 
         jButton4.setBackground(new java.awt.Color(102, 102, 255));
         jButton4.setFont(new java.awt.Font("Sitka Text", 1, 12)); // NOI18N
         jButton4.setText("Acerca de...");
+
+        btn_back.setBackground(new java.awt.Color(102, 102, 255));
+        btn_back.setFont(new java.awt.Font("Sitka Text", 1, 12)); // NOI18N
+        btn_back.setText("<- Back");
+        btn_back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_backActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -89,16 +121,19 @@ public class Menu extends javax.swing.JFrame {
                     .addComponent(jTextField1)
                     .addComponent(jTextField2)
                     .addComponent(jTextField3)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
+                    .addComponent(txt_usuario, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(89, 89, 89)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3)
+                    .addComponent(btn_docu)
                     .addComponent(jButton2))
                 .addGap(107, 107, 107))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(btn_back)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(99, 99, 99)
@@ -120,16 +155,18 @@ public class Menu extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_back)
+                .addGap(2, 2, 2)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
-                .addComponent(jButton3)
+                    .addComponent(txt_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addComponent(btn_docu)
                 .addGap(39, 39, 39))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -151,6 +188,16 @@ public class Menu extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
+        Login log = new Login();
+        log.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_btn_backActionPerformed
+
+    private void btn_docuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_docuActionPerformed
+         abrirarchivo("ESTADISTICA_1_2017.pdf"); ///ESTA RUTA ES SOLO PARA EJEMPLO SE PUEDE SUSTITUIR POR EL DE LA DOCUMENTACION
+    }//GEN-LAST:event_btn_docuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -188,9 +235,10 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_back;
+    private javax.swing.JButton btn_docu;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -200,6 +248,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField txt_usuario;
     // End of variables declaration//GEN-END:variables
 }
