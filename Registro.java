@@ -5,12 +5,15 @@
  */
 package orga;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author IKAROS
  */
 public class Registro extends javax.swing.JFrame {
-
+    public static String nom = " ";
+    public static String pa = " ";
     /**
      * Creates new form Registro
      */
@@ -35,7 +38,8 @@ public class Registro extends javax.swing.JFrame {
         txt_usua = new javax.swing.JTextField();
         password = new javax.swing.JPasswordField();
         confi_pass = new javax.swing.JPasswordField();
-        btn_send = new javax.swing.JButton();
+        btn_back = new javax.swing.JButton();
+        btn_send1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,9 +58,23 @@ public class Registro extends javax.swing.JFrame {
         lbl_pass.setFont(new java.awt.Font("Sitka Text", 1, 12)); // NOI18N
         lbl_pass.setText("CONTRASEÑA:");
 
-        btn_send.setBackground(new java.awt.Color(102, 102, 255));
-        btn_send.setFont(new java.awt.Font("Sitka Text", 1, 12)); // NOI18N
-        btn_send.setText("Enviar Solicitud de Registro");
+        btn_back.setBackground(new java.awt.Color(102, 102, 255));
+        btn_back.setFont(new java.awt.Font("Sitka Text", 1, 12)); // NOI18N
+        btn_back.setText("<- Back");
+        btn_back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_backActionPerformed(evt);
+            }
+        });
+
+        btn_send1.setBackground(new java.awt.Color(102, 102, 255));
+        btn_send1.setFont(new java.awt.Font("Sitka Text", 1, 12)); // NOI18N
+        btn_send1.setText("Enviar Solicitud de Registro");
+        btn_send1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_send1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -75,20 +93,27 @@ public class Registro extends javax.swing.JFrame {
                     .addComponent(confi_pass, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(219, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(214, 214, 214))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btn_send)
-                        .addGap(52, 52, 52))))
+                .addContainerGap()
+                .addComponent(btn_back)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(214, 214, 214))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addContainerGap(366, Short.MAX_VALUE)
+                    .addComponent(btn_send1)
+                    .addGap(42, 42, 42)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jLabel1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(btn_back)))
                 .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -101,9 +126,12 @@ public class Registro extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(confi_pass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addComponent(btn_send)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(87, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addContainerGap(255, Short.MAX_VALUE)
+                    .addComponent(btn_send1)
+                    .addGap(20, 20, 20)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -121,6 +149,27 @@ public class Registro extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
+       Login log = new Login();
+       log.setVisible(true);
+       setVisible(false);
+    }//GEN-LAST:event_btn_backActionPerformed
+
+    private void btn_send1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_send1ActionPerformed
+        String pass = new String(password.getPassword());
+        String confir= new String(confi_pass.getPassword());
+        if(pass.equals(confir)){
+            nom = txt_usua.getText();
+            pa = pass;
+            JOptionPane.showMessageDialog(null, "SOLICITUD ENVIADA AL ADMINISTRADOR ");
+        }else{
+            JOptionPane.showMessageDialog(null, "LAS CONTRASEÑAS NO COINCIDEN INTENTELO DE NUEVO: ");
+        }
+        txt_usua.setText(" ");
+        password.setText(" ");
+        confi_pass.setText(" ");
+    }//GEN-LAST:event_btn_send1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -158,7 +207,8 @@ public class Registro extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_send;
+    private javax.swing.JButton btn_back;
+    private javax.swing.JButton btn_send1;
     private javax.swing.JPasswordField confi_pass;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
